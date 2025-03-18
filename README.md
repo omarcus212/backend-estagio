@@ -162,3 +162,7 @@ Sinta-se a vontade para refatorar o que achar pertinente, considerando questões
 _[Adicione  aqui suas respostas, dúvidas e observações]_
 
 add - .env, prestar atencao na config 
+
+fix(testeunit): altera o tipo da variável price de int para float na Product model 
+- Causa: O campo price estava como int, o que causava perda de precisão nos valores decimais (ex: 99.99 virava 99).
+-Solução: Alterado o tipo da variável price para float.
