@@ -3,9 +3,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: contato-seguro
+    container_name: estagio-teste-backend
     ports:
       - "8000:8000"
     volumes:
       - .:/var/www
+      - ./var/lib/mysql:/var/lib/mysql
     command: sh -c "composer install && php -S 0.0.0.0:8000 -t public"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=marcus13
+      - MYSQL_DB=${MYSQL_DATABASE}
+      
+    env_file:
+      - .env
+
+  mysql:
+    image: mysql:8.0
+    container_name: estagio-teste-backend
+    environment:
+      MYSQL_ROOT_PASSWORD: marcus13
+      MYSQL_DATABASE: teste_backend_estagio
+    ports:
+      - "3306:3306"

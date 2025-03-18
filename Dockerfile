@@ -6,7 +6,10 @@ RUN apt-get update && apt-get install -y \
   git \
   sqlite3 \
   libsqlite3-dev \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg \
+  && docker-php-ext-install gd pdo pdo_mysql \
   && rm -rf /var/lib/apt/lists/*
+
 
 RUN docker-php-ext-install pdo pdo_sqlite
 

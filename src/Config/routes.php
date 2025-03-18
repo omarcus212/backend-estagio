@@ -7,6 +7,10 @@ use Contatoseguro\TesteBackend\Controller\ProductController;
 use Contatoseguro\TesteBackend\Controller\ReportController;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
 
 /** @var App $app*/
 $app->get('/', [HomeController::class, 'home']);

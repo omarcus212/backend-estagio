@@ -4,7 +4,8 @@
         "slim/slim": "^4.12",
         "slim/psr7": "^1.6",
         "robmorgan/phinx": "^0.16.6",
-        "symfony/yaml": "^7.2"
+        "symfony/yaml": "^7.2",
+        "vlucas/phpdotenv": "^5.6"
     },
     "autoload": {
         "psr-4": {
@@ -15,7 +16,7 @@
         "migrate": "./vendor/bin/phinx migrate",
         "create-migration": "./vendor/bin/phinx create",
         "rollback-migration": "./vendor/bin/phinx rollback",
-
+       "start": "php -S localhost:8080 -t public",
         "test": ["phpunit --testsuite unit --testdox"]
     },
     "require-dev": {
