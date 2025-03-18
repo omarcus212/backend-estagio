@@ -160,3 +160,5 @@ Sinta-se a vontade para refatorar o que achar pertinente, considerando questões
 
 ## Suas Respostas, Dúvidas e Observações
 _[Adicione  aqui suas respostas, dúvidas e observações]_
+
+add - .env, prestar atencao na config 
