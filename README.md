@@ -152,7 +152,7 @@ Sinta-se a vontade para refatorar o que achar pertinente, considerando questões
 > Esta etapa é opcional, sinta-se a vontade para mostrar sua proficiência com docker fazendo modificações e aplicando novas estruturas que achar pertinente. Abaixo estão listadas algumas sugestões de modificações. 
 
 ### Desafios
-- [ ] Substituir o banco serverless **SQLite** por um banco como **MySQL**/**PostgreSQL**/outro e servir por container;
+- [x] Substituir o banco serverless **SQLite** por um banco como **MySQL**/**PostgreSQL**/outro e servir por container;
 - [ ] Escrever **novos testes unitários** para funcionalidades faltantes;
 - [ ] Implementar um **Linter** e disponibilizar por docker (especificar comando);
 - [ ] Implementar **análise estática** e disponibilizar por docker (especificar comando);
