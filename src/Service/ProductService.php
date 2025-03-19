@@ -19,7 +19,7 @@ class ProductService
             FROM product p
             INNER JOIN product_category pc ON pc.product_id = p.id
             INNER JOIN category c ON c.id = pc.cat_id
-            WHERE p.company_id = {$adminUserId}
+            WHERE p.company_id = {$adminUserId} order by pc.id desc
         ";
 
         $stm = $this->pdo->prepare($query);

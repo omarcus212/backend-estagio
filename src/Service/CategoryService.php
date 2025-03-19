@@ -4,6 +4,7 @@ namespace Contatoseguro\TesteBackend\Service;
 
 use Contatoseguro\TesteBackend\Config\DB;
 
+
 class CategoryService
 {
     private \PDO $pdo;
@@ -30,6 +31,7 @@ class CategoryService
 
     public function getOne($adminUserId, $categoryId)
     {
+
         $query = "
             SELECT *
             FROM category c
@@ -39,7 +41,6 @@ class CategoryService
         ";
 
         $stm = $this->pdo->prepare($query);
-
         $stm->execute();
 
         return $stm;
@@ -108,16 +109,17 @@ class CategoryService
 
     private function getCompanyFromAdminUser($adminUserId)
     {
+
         $query = "
             SELECT company_id
             FROM admin_user
-            WHERE id = {$adminUserId}
+            WHERE id ={$adminUserId}
         ";
 
         $stm = $this->pdo->prepare($query);
-
         $stm->execute();
+        $res = $stm->fetch();
 
-        return $stm->fetch()->company_id;
+        return $res["company_id"];
     }
 }

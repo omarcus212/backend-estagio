@@ -19,13 +19,14 @@ class Product
 
     public static function hydrateByFetch($fetch): self
     {
+
         return new self(
-            (int) $fetch->id,
-            (int) $fetch->company_id,
-            (string) $fetch->title,
-            (float) $fetch->price,
-            (bool) $fetch->active,
-            (string) $fetch->created_at
+            (int) $fetch["id"],
+            (int) $fetch["company_id"],
+            (string) $fetch["title"],
+            (float) $fetch["price"],
+            (bool) $fetch["active"],
+            (string) $fetch["created_at"]
         );
     }
 
