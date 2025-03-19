@@ -22,9 +22,9 @@ class ProductController
     public function getAll(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $adminUserId = $request->getHeader('admin_user_id')[0];
-        
+
         $stm = $this->service->getAll($adminUserId);
-        $response->getBody()->write(json_encode($stm->fetchAll()));
+        $response->getBody()->write(json_encode($stm->fetchAll(\PDO::FETCH_ASSOC)));
         return $response->withStatus(200);
     }
 
