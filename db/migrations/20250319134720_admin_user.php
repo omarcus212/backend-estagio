@@ -8,10 +8,10 @@ class AdminUser extends AbstractMigration
   {
     $table = $this->table('admin_user');
     $table->addColumn('company_id', 'integer', ['signed' => false])
+      ->addForeignKey('company_id', 'company', 'id', ['delete' => 'CASCADE'])
       ->addColumn('email', 'string', ['limit' => 255])
       ->addColumn('name', 'string', ['limit' => 255])
       ->addIndex('email', ['unique' => true])
-      ->addForeignKey('company_id', 'company', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
       ->create();
 
     $this->execute("INSERT INTO admin_user (id, company_id, email, name) VALUES

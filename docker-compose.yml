@@ -3,30 +3,28 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: estagio-teste-backend
+    container_name: estagio-teste-backend-api
     ports:
-      - "8000:8000"
+      - "8080:8080"
     volumes:
       - .:/var/www
-    working_dir: /var/www
     depends_on:
       - mysql
     environment:
-      - DB_HOST=${MYSQL_HOST}
-      - DB_DATABASE=${MYSQL_DATABASE}
-      - DB_USERNAME=${MYSQL_USER}
-      - DB_PASSWORD=${MYSQL_PASSWORD}
-    command: sh -c "composer install && php artisan migrate && php -S 0.0.0.0:8000 -t public"
+      MYSQL_ROOT_PASSWORD: marcus13
+      DB_HOST: estagio-teste-backend-mysql
+      DB_DATABASE: teste_backend_estagio
+      DB_USERNAME: root
+      DB_PASSWORD: marcus13
+    command: sh -c "composer install && docker-compose run --rm api composer migrate && php -S 0.0.0.0:8080 -t public"
 
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: estagio-teste-backend-mysql
     environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER:  ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: marcus13
+      MYSQL_DATABASE: teste_backend_estagio
+
     ports:
       - "3306:3306"
     volumes:

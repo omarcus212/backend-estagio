@@ -8,8 +8,8 @@ environments:
 
   development:
     adapter: mysql
-    host: localhost
-    name: teste
+    host: estagio-teste-backend-mysql
+    name: teste_backend_estagio
     user: root
     pass: marcus13
     port: 3306

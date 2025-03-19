@@ -14,10 +14,11 @@ class CategoryService
 
     public function getAll($adminUserId)
     {
+
         $query = "
             SELECT *
             FROM category c
-            WHERE c.company_id = {$this->getCompanyFromAdminUser($adminUserId)}
+            WHERE c.company_id = {$this->getCompanyFromAdminUser($adminUserId)} and c.company_id != 'null'
         ";
 
         $stm = $this->pdo->prepare($query);
@@ -80,7 +81,7 @@ class CategoryService
 
     public function updateOne($id, $body, $adminUserId)
     {
-        $active = (int)$body['active'];
+        $active = (int) $body['active'];
 
         $stm = $this->pdo->prepare("
             UPDATE category
@@ -114,7 +115,7 @@ class CategoryService
         ";
 
         $stm = $this->pdo->prepare($query);
-        
+
         $stm->execute();
 
         return $stm->fetch()->company_id;

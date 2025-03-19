@@ -2,7 +2,6 @@
 
 namespace Contatoseguro\TesteBackend\Config;
 
-
 class DB
 {
     public static \PDO $pdo;
@@ -10,28 +9,21 @@ class DB
     public static function connect()
     {
 
-        $host = $_ENV['MYSQL_HOST'] ?: 'mysql';
-        $dbname = $_ENV['MYSQL_DATABASE'] ?: 'contatoseguro';
-        $username = $_ENV['MYSQL_USER'] ?: 'root';
-        $password = $_ENV['MYSQL_PASSWORD'] ?: '';
+        $host = $_ENV['DB_HOST'] ?? 'estagio-teste-backend-mysql';
+        $dbname = $_ENV['DB_NAME'] ?? 'teste_backend_estagio';
+        $user = $_ENV['DB_USER'] ?? 'root';
+        $pass = $_ENV['DB_PASS'] ?? 'marcus13';
 
-        if (empty($host)) {
-            throw new \Exception("MYSQL_HOST is not defined in the environment.");
-        }
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
-        if (!isset(self::$pdo)) {
-            try {
-
-                self::$pdo = new \PDO(
-                    "mysql:host=$host;dbname=$dbname;charset=utf8",
-                    $username,
-                    $password,
-                    [\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
-                );
-            } catch (\PDOException $e) {
-
-                die("Connection failed: " . $e->getMessage());
+        try {
+            if (!isset(self::$pdo)) {
+                self::$pdo = new \PDO($dsn, $user, $pass);
+                self::$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             }
+        } catch (\PDOException $e) {
+            echo "Erro ao conectar: " . $e->getMessage();
+            exit;
         }
 
         return self::$pdo;
