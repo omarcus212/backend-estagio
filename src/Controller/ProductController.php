@@ -34,11 +34,14 @@ class ProductController
         $product = Product::hydrateByFetch($stm);
 
         $adminUserId = $request->getHeader('admin_user_id')[0];
-        $productCategory = $this->categoryService->getProductCategory($product->id)->fetch();
-        $fetchedCategory = $this->categoryService->getOne($adminUserId, $productCategory["id"])->fetch();
-        $product->setCategory($fetchedCategory["title"]);
+        $productCategory = $this->categoryService->getProductCategory($product->id)->fetchAll(\PDO::FETCH_ASSOC);
 
-        $response->getBody()->write(json_encode($product));
+        for ($i = 0; $i < count($productCategory); $i++) {
+            $fetchedCategory = $this->categoryService->getOne($adminUserId, $productCategory[$i]["id"])->fetch();
+            $product->setCategory($fetchedCategory["title"]);
+            $response->getBody()->write(json_encode($product));
+        }
+
         return $response->withStatus(200);
     }
 

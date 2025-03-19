@@ -53,7 +53,7 @@ class CategoryService
             FROM category c
             INNER JOIN product_category pc
                 ON pc.cat_id = c.id
-            WHERE pc.product_id = {$productId}
+            WHERE pc.product_id = {$productId} GROUP BY id
         ";
 
         $stm = $this->pdo->prepare($query);
