@@ -1,14 +1,19 @@
 paths:
- migrations: ./db/migrations
- seeds: ./db/seeds
+  migrations: ./db/migrations
+  seeds: ./db/seeds
 
 environments:
- default_migration_table: phinxlog
- default_environment: development
+  default_migration_table: phinxlog
+  default_environment: development
 
- development:
-  adapter: sqlite
-  name: ./db/db
+  development:
+    adapter: mysql
+    host: localhost
+    name: teste
+    user: root
+    pass: marcus13
+    port: 3306
+    charset: utf8
 
 templates:
   file: ./db/migrations/templates/template_migration.php.template
