@@ -19,7 +19,7 @@ class ProductService
             FROM product p
             INNER JOIN product_category pc ON pc.product_id = p.id
             INNER JOIN category c ON c.id = pc.cat_id
-            WHERE p.company_id = {$adminUserId} and p.active = $active
+            WHERE p.company_id = {$adminUserId} and p.active = $active 
         ";
 
         if ($category !== "") {
@@ -38,8 +38,23 @@ class ProductService
     {
         $stm = $this->pdo->prepare("
             SELECT *
-            FROM product
+            FROM product 
             WHERE id = {$id}
+        ");
+        $stm->execute();
+
+        return $stm;
+    }
+
+
+    public function getOneProductCategory($id)
+    {
+        $stm = $this->pdo->prepare("
+             SELECT p.*, c.title as category
+            FROM product p
+            INNER JOIN product_category pc ON pc.product_id = p.id
+            INNER JOIN category c ON c.id = pc.cat_id
+            WHERE p.id = {$id};
         ");
         $stm->execute();
 
@@ -159,10 +174,26 @@ class ProductService
     public function getLog($id)
     {
         $stm = $this->pdo->prepare("
-            SELECT *
-            FROM product_log
-            WHERE product_id = {$id}
-        ");
+           SELECT 
+            pl.id, pl.product_id, pl.action, pl.timestamp, au.name 
+            FROM product_log pl 
+            inner join admin_user au on au.id = pl.admin_user_id 
+            where pl.product_id = {$id};
+                ");
+        $stm->execute();
+
+        return $stm;
+    }
+
+    public function getOneLog($id)
+    {
+        $stm = $this->pdo->prepare("
+           SELECT 
+            pl.id, pl.product_id, pl.action, pl.timestamp, au.name 
+            FROM product_log pl 
+            inner join admin_user au on au.id = pl.admin_user_id 
+            where pl.product_id = {$id} ORDER BY pl.id desc LIMIT 1;
+                ");
         $stm->execute();
 
         return $stm;

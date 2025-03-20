@@ -21,6 +21,10 @@ class ReportController
     public function generate(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $adminUserId = $request->getHeader('admin_user_id')[0];
+        $order = isset($_GET['order']) ? $_GET['order'] : 'desc';
+        $category = isset($_GET['category']) && $_GET['category'] !== "" ? $_GET['category'] : "";
+        $active = isset($_GET['active']) ? $_GET['active'] : '1';
+        $productOne = isset($_GET['product']) ? $_GET['product'] : false;
 
         $data = [];
         $data[] = [
@@ -33,15 +37,35 @@ class ReportController
             'Logs de Alterações'
         ];
 
-        $stm = $this->productService->getAll($adminUserId);
-        $products = $stm->fetchAll();
+        $stm = $this->productService->getAll($adminUserId, $active, $category, $order);
+        $products = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        if ($productOne) {
+            $stm = $this->productService->getOneProductCategory($productOne);
+            $products = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        }
 
         foreach ($products as $i => $product) {
             $stm = $this->companyService->getNameById($product->company_id);
-            $companyName = $stm->fetch()->name;
+            $companyName = $stm->fetch(\PDO::FETCH_OBJ)->name;
 
             $stm = $this->productService->getLog($product->id);
-            $productLogs = $stm->fetchAll();
+            $productLogs = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+            if ($productOne) {
+                $stm = $this->productService->getOneLog($product->id);
+                $productLogs = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+            }
+
+            $logString = '';
+
+            foreach ($productLogs as $log) {
+                $logString .= "Ultima alteração: ({$log->name}, {$log->action}, {$log->timestamp}), 
+                ";
+
+            }
 
             $data[$i + 1][] = $product->id;
             $data[$i + 1][] = $companyName;
@@ -49,13 +73,14 @@ class ReportController
             $data[$i + 1][] = $product->price;
             $data[$i + 1][] = $product->category;
             $data[$i + 1][] = $product->created_at;
-            $data[$i + 1][] = $productLogs;
+            $data[$i + 1][] = $logString ? $logString : 'Nenhum log de alteração';
         }
 
         $report = "<table style='font-size: 10px;'>";
         foreach ($data as $row) {
             $report .= "<tr>";
             foreach ($row as $column) {
+
                 $report .= "<td>{$column}</td>";
             }
             $report .= "</tr>";

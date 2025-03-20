@@ -118,8 +118,7 @@ class CategoryService
 
         $stm = $this->pdo->prepare($query);
         $stm->execute();
-        $res = $stm->fetch();
+        return $stm->fetch(\PDO::FETCH_OBJ)->company_id;
 
-        return $res["company_id"];
     }
 }
