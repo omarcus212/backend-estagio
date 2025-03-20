@@ -12,18 +12,23 @@ class ProductService
         $this->pdo = DB::connect();
     }
 
-    public function getAll($adminUserId)
+    public function getAll($adminUserId, $active, $category, $order)
     {
         $query = "
             SELECT p.*, c.title as category
             FROM product p
             INNER JOIN product_category pc ON pc.product_id = p.id
             INNER JOIN category c ON c.id = pc.cat_id
-            WHERE p.company_id = {$adminUserId} order by pc.id desc
+            WHERE p.company_id = {$adminUserId} and p.active = $active
         ";
 
-        $stm = $this->pdo->prepare($query);
+        if ($category !== "") {
+            $query .= " AND c.title = '{$category}'";
+        }
 
+        $query .= " ORDER BY p.created_at $order";
+
+        $stm = $this->pdo->prepare($query);
         $stm->execute();
 
         return $stm;

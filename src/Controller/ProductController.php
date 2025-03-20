@@ -22,16 +22,19 @@ class ProductController
     public function getAll(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $adminUserId = $request->getHeader('admin_user_id')[0];
+        $order = isset($_GET['order']) ? $_GET['order'] : 'desc';
+        $category = isset($_GET['category']) && $_GET['category'] !== "" ? $_GET['category'] : "";
+        $active = isset($_GET['active']) ? $_GET['active'] : '1';
 
-        $stm = $this->service->getAll($adminUserId);
+        $stm = $this->service->getAll($adminUserId, $active, $category, $order);
         $response->getBody()->write(json_encode($stm->fetchAll(\PDO::FETCH_ASSOC)));
         return $response->withStatus(200);
     }
 
     public function getOne(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $stm = $this->service->getOne($args['id'])->fetch();
-        $product = Product::hydrateByFetch($stm);
+        $stm = $this->service->getOne($args['id']);
+        $product = Product::hydrateByFetch($stm->fetch());
 
         $adminUserId = $request->getHeader('admin_user_id')[0];
         $productCategory = $this->categoryService->getProductCategory($product->id)->fetchAll(\PDO::FETCH_ASSOC);

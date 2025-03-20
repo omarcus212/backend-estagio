@@ -16,7 +16,7 @@ services:
       DB_DATABASE: teste_backend_estagio
       DB_USERNAME: root
       DB_PASSWORD: marcus13
-    command: sh -c "composer install && docker-compose run --rm api composer migrate && php -S 0.0.0.0:8080 -t public"
+    command: sh -c "composer install && php -S 0.0.0.0:8080 -t public"
 
   mysql:
     image: mysql:8.0

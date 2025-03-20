@@ -5,6 +5,7 @@ use Contatoseguro\TesteBackend\Controller\CompanyController;
 use Contatoseguro\TesteBackend\Controller\HomeController;
 use Contatoseguro\TesteBackend\Controller\ProductController;
 use Contatoseguro\TesteBackend\Controller\ReportController;
+use Contatoseguro\TesteBackend\Middleware\JsonResponseMiddleware;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Dotenv\Dotenv;
