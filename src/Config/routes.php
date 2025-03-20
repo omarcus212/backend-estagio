@@ -5,7 +5,7 @@ use Contatoseguro\TesteBackend\Controller\CompanyController;
 use Contatoseguro\TesteBackend\Controller\HomeController;
 use Contatoseguro\TesteBackend\Controller\ProductController;
 use Contatoseguro\TesteBackend\Controller\ReportController;
-use Contatoseguro\TesteBackend\Middleware\JsonResponseMiddleware;
+use Contatoseguro\TesteBackend\Controller\CommentsController;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Dotenv\Dotenv;
@@ -35,6 +35,15 @@ $app->group('/categories', function (RouteCollectorProxy $group) {
     $group->post('', [CategoryController::class, 'insertOne']);
     $group->put('/{id}', [CategoryController::class, 'updateOne']);
     $group->delete('/{id}', [CategoryController::class, 'deleteOne']);
+});
+
+$app->group('/comments', function (RouteCollectorProxy $group) {
+    $group->get('/product/{id}', [CommentsController::class, 'getOne']);
+    $group->get('/likes', [CommentsController::class, 'getAllLike']);
+    $group->post('/product/{id}', [CommentsController::class, 'insertOne']);
+    $group->post('/replay/{commentId}', [CommentsController::class, 'insertReplay']);
+    $group->post('/like/{commentId}', [CommentsController::class, 'insertLike']);
+    $group->delete('/{commentId}', [CommentsController::class, 'deleteOne']);
 });
 
 $app->get('/report', [ReportController::class, 'generate']);

@@ -64,19 +64,17 @@ class ProductService
     public function insertOne($body, $adminUserId)
     {
         $stm = $this->pdo->prepare("
-            INSERT INTO product (
-                company_id,
-                title,
-                price,
-                active
-            ) VALUES (
-                {$body['company_id']},
-                '{$body['title']}',
-                {$body['price']},
-                {$body['active']}
-            )
+           INSERT INTO product (company_id, title, price, active)
+           VALUES (:company_id, :title, :price, :active)
         ");
-        if (!$stm->execute())
+        if (
+            !$stm->execute([
+                'company_id' => $body['company_id'],
+                'title' => $body['title'],
+                'price' => $body['price'],
+                'active' => $body['active']
+            ])
+        )
             return false;
 
         $productId = $this->pdo->lastInsertId();
@@ -112,13 +110,22 @@ class ProductService
     {
         $stm = $this->pdo->prepare("
             UPDATE product
-            SET company_id = {$body['company_id']},
-                title = '{$body['title']}',
-                price = {$body['price']},
-                active = {$body['active']}
+            SET company_id = :company_id,
+                title =  :title,
+                price = :price,
+                active = :active
             WHERE id = {$id}
         ");
-        if (!$stm->execute())
+        if (
+            !$stm->execute(
+                [
+                    'company_id' => $body['company_id'],
+                    'title' => $body['title'],
+                    'price' => $body['price'],
+                    'active' => $body['active']
+                ]
+            )
+        )
             return false;
 
         $stm = $this->pdo->prepare("
