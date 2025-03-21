@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS "product_category" (
 	"id"	integer,
 	"cat_id"	integer NOT NULL,
 	"product_id"	integer NOT NULL,
+	"active" tinyint,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("cat_id") REFERENCES "category"("id"),
 	FOREIGN KEY("product_id") REFERENCES "product"("id")
@@ -85,28 +86,28 @@ INSERT INTO "product" VALUES (15,1,'muffin',14.24,1,'2023-12-20 21:12:22');
 INSERT INTO "product" VALUES (16,1,'coffee candy',1.8,0,'2023-12-20 21:12:22');
 INSERT INTO "product" VALUES (17,1,'air conditioning',2700.0,1,'2023-12-20 21:19:58');
 INSERT INTO "product" VALUES (18,1,'refrigerator',680.5,1,'2023-12-21 15:31:45');
-INSERT INTO "product_category" VALUES (1,1,1);
-INSERT INTO "product_category" VALUES (2,1,2);
-INSERT INTO "product_category" VALUES (3,1,3);
-INSERT INTO "product_category" VALUES (4,2,4);
-INSERT INTO "product_category" VALUES (5,2,5);
-INSERT INTO "product_category" VALUES (6,3,6);
-INSERT INTO "product_category" VALUES (7,3,7);
-INSERT INTO "product_category" VALUES (8,4,8);
-INSERT INTO "product_category" VALUES (9,6,8);
-INSERT INTO "product_category" VALUES (10,4,9);
-INSERT INTO "product_category" VALUES (11,6,9);
-INSERT INTO "product_category" VALUES (12,4,10);
-INSERT INTO "product_category" VALUES (13,6,10);
-INSERT INTO "product_category" VALUES (14,4,11);
-INSERT INTO "product_category" VALUES (15,6,11);
-INSERT INTO "product_category" VALUES (16,5,12);
-INSERT INTO "product_category" VALUES (17,5,13);
-INSERT INTO "product_category" VALUES (18,5,14);
-INSERT INTO "product_category" VALUES (19,5,15);
-INSERT INTO "product_category" VALUES (20,5,16);
-INSERT INTO "product_category" VALUES (21,6,17);
-INSERT INTO "product_category" VALUES (22,6,18);
+INSERT INTO "product_category" VALUES (1,1,1,1);
+INSERT INTO "product_category" VALUES (2,1,2,1);
+INSERT INTO "product_category" VALUES (3,1,3,1);
+INSERT INTO "product_category" VALUES (4,2,4,1);
+INSERT INTO "product_category" VALUES (5,2,5,1);
+INSERT INTO "product_category" VALUES (6,3,6,1);
+INSERT INTO "product_category" VALUES (7,3,7,1);
+INSERT INTO "product_category" VALUES (8,4,8,1);
+INSERT INTO "product_category" VALUES (9,6,8,1);
+INSERT INTO "product_category" VALUES (10,4,9,1);
+INSERT INTO "product_category" VALUES (11,6,9,1);
+INSERT INTO "product_category" VALUES (12,4,10,1);
+INSERT INTO "product_category" VALUES (13,6,10,1);
+INSERT INTO "product_category" VALUES (14,4,11,1);
+INSERT INTO "product_category" VALUES (15,6,11,1);
+INSERT INTO "product_category" VALUES (16,5,12,1);
+INSERT INTO "product_category" VALUES (17,5,13,1);
+INSERT INTO "product_category" VALUES (18,5,14,1);
+INSERT INTO "product_category" VALUES (19,5,15,1);
+INSERT INTO "product_category" VALUES (20,5,16,1);
+INSERT INTO "product_category" VALUES (21,6,17,1);
+INSERT INTO "product_category" VALUES (22,6,18,1);
 INSERT INTO "product_log" VALUES (1,1,1,'create','2023-12-20 21:32:22');
 INSERT INTO "product_log" VALUES (2,1,2,'update','2023-12-20 21:32:22');
 INSERT INTO "product_log" VALUES (3,1,3,'update','2023-12-20 21:32:22');
