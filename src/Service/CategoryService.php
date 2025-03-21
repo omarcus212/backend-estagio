@@ -93,7 +93,6 @@ class CategoryService
 
         try {
 
-
             $active = (int) $body['active'];
 
             $stm = $this->pdo->prepare("

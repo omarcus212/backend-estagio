@@ -63,6 +63,7 @@ class ProductService
 
     public function insertOne($body, $adminUserId)
     {
+
         $stm = $this->pdo->prepare("
            INSERT INTO product (company_id, title, price, active)
            VALUES (:company_id, :title, :price, :active)
@@ -72,7 +73,7 @@ class ProductService
                 'company_id' => $body['company_id'],
                 'title' => $body['title'],
                 'price' => $body['price'],
-                'active' => $body['active']
+                'active' => (int) $body['active']
             ])
         )
             return false;
@@ -122,7 +123,7 @@ class ProductService
                     'company_id' => $body['company_id'],
                     'title' => $body['title'],
                     'price' => $body['price'],
-                    'active' => $body['active']
+                    'active' => (int) $body['active']
                 ]
             )
         )
@@ -153,6 +154,7 @@ class ProductService
 
     public function deleteOne($id, $adminUserId)
     {
+
         $stm = $this->pdo->prepare("
             DELETE FROM product_category WHERE product_id = {$id}
         ");
@@ -164,18 +166,17 @@ class ProductService
             return false;
 
         $stm = $this->pdo->prepare("
-            INSERT INTO product_log (
-                product_id,
-                admin_user_id,
-                `action`
-            ) VALUES (
-                {$id},
-                {$adminUserId},
-                'delete'
-            )
+            INSERT INTO product_log (product_id, admin_user_id, `action`)
+            VALUES (:id, :adminUserId, 'delete')
         ");
 
-        return $stm->execute();
+        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stm->bindParam(':adminUserId', $adminUserId, \PDO::PARAM_INT);
+
+        // if (!$stm->execute())
+        //     return false;
+        return $stm;
+
     }
 
     public function getLog($id)

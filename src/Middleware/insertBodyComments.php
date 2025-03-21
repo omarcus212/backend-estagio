@@ -8,7 +8,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
 
 
-class InsertBodyCategoryMiddleware
+class InsertBodyComments
 {
     public function __invoke(Request $request, RequestHandler $handler): ResponseInterface
     {
@@ -17,8 +17,7 @@ class InsertBodyCategoryMiddleware
         $response = new Response();
 
         if (
-            !isset($body['title']) || empty($body['title']) ||
-            !isset($body['active']) || !is_bool($body['active'])
+            !isset($body['comment']) || empty($body['comment'])
         ) {
 
             $response->getBody()->write(json_encode(['msg' => 'Empty or non-existent fields']));

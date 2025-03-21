@@ -53,10 +53,19 @@ class ProductController
         $body = $request->getParsedBody();
         $adminUserId = $request->getHeader('admin_user_id')[0];
 
+
         if ($this->service->insertOne($body, $adminUserId)) {
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Product created successfully'
+            ]));
             return $response->withStatus(200);
         } else {
-            return $response->withStatus(404);
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'the product could not be created successfully'
+            ]));
+            return $response->withStatus(200);
         }
     }
 
@@ -66,9 +75,20 @@ class ProductController
         $adminUserId = $request->getHeader('admin_user_id')[0];
 
         if ($this->service->updateOne($args['id'], $body, $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Product updated successfully'
+            ]));
             return $response->withStatus(200);
+
         } else {
-            return $response->withStatus(404);
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'the product could not be updated successfully'
+            ]));
+            return $response->withStatus(200);
         }
     }
 
@@ -77,9 +97,21 @@ class ProductController
         $adminUserId = $request->getHeader('admin_user_id')[0];
 
         if ($this->service->deleteOne($args['id'], $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Category delete successfully'
+            ]));
             return $response->withStatus(200);
+
         } else {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'the category could not be delete successfully'
+            ]));
             return $response->withStatus(404);
+
         }
     }
 }

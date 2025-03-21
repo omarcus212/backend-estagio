@@ -8,16 +8,17 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
 
 
-class InsertBodyCategoryMiddleware
+class InsertBodyCommentsReplay
 {
     public function __invoke(Request $request, RequestHandler $handler): ResponseInterface
     {
 
         $body = $request->getParsedBody();
         $response = new Response();
+        var_dump(is_numeric('product'));
 
         if (
-            !isset($body['title']) || empty($body['title']) ||
+            empty($body['product']) || !is_numeric('product') ||
             !isset($body['active']) || !is_bool($body['active'])
         ) {
 
