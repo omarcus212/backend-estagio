@@ -21,13 +21,14 @@ class ProductTest extends TestCase
 
   public function testHydrateByFetch(): void
   {
-    $fetch = new \stdClass();
-    $fetch->id = 1;
-    $fetch->company_id = 2;
-    $fetch->title = 'Test Product';
-    $fetch->price = 99.99;
-    $fetch->active = true;
-    $fetch->created_at = '2023-10-01';
+    $fetch = [
+      'id' => 1,
+      'company_id' => 2,
+      'title' => 'Test Product',
+      'price' => 99.99,
+      'active' => true,
+      'created_at' => '2023-10-01'
+    ];
 
     $product = Product::hydrateByFetch($fetch);
 
