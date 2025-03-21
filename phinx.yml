@@ -7,12 +7,12 @@ environments:
   default_environment: development
 
   development:
-    adapter: <%= ENV['mysql'] %>
-    host: <%= ENV['DB_HOST'] %>
-    name: <%= ENV['MYSQL_DATABASE'] %>
-    user: <%= ENV['MYSQL_USER'] %>
-    pass: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
-    port: <%= ENV['MYSQL_PORT'] %>
+    adapter: mysql
+    host: estagio-teste-backend-mysql
+    name: teste_backend_estagio
+    user: root
+    pass: "{coloque aqui sua senha}"
+    port: 3306
     charset: utf8
 
 templates:
