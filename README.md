@@ -193,8 +193,8 @@ Sinta-se a vontade para refatorar o que achar pertinente, considerando questões
 
 Para começar, é necessário clonar este repositório na sua máquina local. Execute o seguinte comando no terminal:
 
-git clone https://github.com/omarcus212/teste-backend-estagio
-cd teste-backend-estagio
+- git clone https://github.com/omarcus212/teste-backend-estagio
+- cd teste-backend-estagio
 
 ## Configure as variáveis de ambiente e arquivos de configuração
 
