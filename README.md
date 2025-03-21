@@ -228,7 +228,7 @@ cd teste-backend-estagio
 ## Sobre a API
 
 - Deve ser utilizado o Postman para desenvolvimento e documentação, o arquivo para importação das rotas se encontra em docs/Teste estagio PHP.postman\*collection.json
-  - voce pode acessar https://documenter.getpostman.com/view/21065723/2sAYkGMLBS para ver a documentacao da api e rotas.
+- voce pode acessar https://documenter.getpostman.com/view/21065723/2sAYkGMLBS para ver a documentação da api e rotas.
 
 > [!WARNING]
 
