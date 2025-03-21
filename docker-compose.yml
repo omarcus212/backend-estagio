@@ -11,18 +11,18 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_ROOT_PASSWORD: '{coloque aqui sua senha}'
+      MYSQL_ROOT_PASSWORD: marcus13
       DB_HOST: estagio-teste-backend-mysql
       DB_DATABASE: teste_backend_estagio
       DB_USERNAME: root
-      DB_PASSWORD: '{coloque aqui sua senha}'
+      DB_PASSWORD: marcus13
     command: sh -c "composer install && php -S 0.0.0.0:8080 -t public"
 
   mysql:
     image: mysql:8.0
     container_name: estagio-teste-backend-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: '{coloque aqui sua senha}'
+      MYSQL_ROOT_PASSWORD: marcus13
       MYSQL_DATABASE: teste_backend_estagio
 
     ports:
