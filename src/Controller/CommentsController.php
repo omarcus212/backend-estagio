@@ -76,7 +76,7 @@ class CommentsController
 
     public function getAllLike(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $stm = $this->service->getAllLike();
+        $stm = $this->service->getLike($args["id"]);
         $response->getBody()->write(json_encode($stm->fetchAll(\PDO::FETCH_ASSOC)));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
     }

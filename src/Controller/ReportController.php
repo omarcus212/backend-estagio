@@ -23,7 +23,7 @@ class ReportController
         $adminUserId = $request->getHeader('admin_user_id')[0];
         $order = isset($_GET['order']) ? $_GET['order'] : 'desc';
         $category = isset($_GET['category']) && $_GET['category'] !== "" ? $_GET['category'] : "";
-        $active = isset($_GET['active']) ? $_GET['active'] : '1';
+        $active = isset($_GET['active']) ? $_GET['active'] : 'all';
         $productOne = isset($_GET['product']) ? $_GET['product'] : false;
 
         $data = [];

@@ -34,7 +34,8 @@ $app->group('/products', function (RouteCollectorProxy $group) {
         ->add(new InsertBodyProductMiddleware());
     $group->put('/{id}', [ProductController::class, 'updateOne'])
         ->add(new InsertBodyProductMiddleware());
-    $group->delete('/{id}', [ProductController::class, 'deleteOne']);
+    $group->delete('/remove/{id}', [ProductController::class, 'deleteOne']);
+    $group->delete('/delete/{id}', [ProductController::class, 'delete']);
 });
 
 $app->group('/categories', function (RouteCollectorProxy $group) {
@@ -49,7 +50,7 @@ $app->group('/categories', function (RouteCollectorProxy $group) {
 
 $app->group('/comments', function (RouteCollectorProxy $group) {
     $group->get('/product/{id}', [CommentsController::class, 'getOne']);
-    $group->get('/likes', [CommentsController::class, 'getAllLike']);
+    $group->get('/likes/{id}', [CommentsController::class, 'getAllLike']);
     $group->post('/product/{id}', [CommentsController::class, 'insertOne'])
         ->add(new InsertBodyComments());
     $group->post('/replay/{commentId}', [CommentsController::class, 'insertReplay'])

@@ -19,11 +19,14 @@ class ProductService
             FROM product p
             INNER JOIN product_category pc ON pc.product_id = p.id
             INNER JOIN category c ON c.id = pc.cat_id
-            WHERE p.company_id = {$adminUserId} and p.active = $active 
+            WHERE p.company_id = {$adminUserId} 
         ";
 
         if ($category !== "") {
             $query .= " AND c.title = '{$category}'";
+        }
+        if ($active !== 'all') {
+            $query .= " and p.active = $active ";
         }
 
         $query .= " ORDER BY p.created_at $order";
@@ -156,8 +159,44 @@ class ProductService
     {
 
         $stm = $this->pdo->prepare("
-            DELETE FROM product_category WHERE product_id = {$id}
+            UPDATE product_category set active = 0 WHERE product_id = {$id}
         ");
+        if (!$stm->execute())
+            return false;
+
+        $stm = $this->pdo->prepare("UPDATE product set active = 0 WHERE id = {$id}");
+        if (!$stm->execute())
+            return false;
+
+        $stm = $this->pdo->prepare("
+             INSERT INTO product_log (
+                 product_id,
+                 admin_user_id,
+                 `action`
+             ) VALUES (
+                :product_id,
+                :admin_user_id,
+                :action
+             )
+         ");
+
+        $stm->execute([
+            ':product_id' => $id,
+            ':admin_user_id' => $adminUserId,
+            ':action' => 'removed'
+        ]);
+
+        return $stm;
+
+    }
+
+
+    public function delete($id, $adminUserId)
+    {
+
+        $stm = $this->pdo->prepare("
+             DELETE FROM product_category WHERE product_id = {$id}
+         ");
         if (!$stm->execute())
             return false;
 
@@ -165,16 +204,10 @@ class ProductService
         if (!$stm->execute())
             return false;
 
-        $stm = $this->pdo->prepare("
-            INSERT INTO product_log (product_id, admin_user_id, `action`)
-            VALUES (:id, :adminUserId, 'delete')
-        ");
+        $stm = $this->pdo->prepare("DELETE FROM product_log WHERE product_id = {$id}");
+        if (!$stm->execute())
+            return false;
 
-        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
-        $stm->bindParam(':adminUserId', $adminUserId, \PDO::PARAM_INT);
-
-        // if (!$stm->execute())
-        //     return false;
         return $stm;
 
     }

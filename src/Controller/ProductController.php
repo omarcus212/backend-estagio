@@ -24,7 +24,7 @@ class ProductController
         $adminUserId = $request->getHeader('admin_user_id')[0];
         $order = isset($_GET['order']) ? $_GET['order'] : 'desc';
         $category = isset($_GET['category']) && $_GET['category'] !== "" ? $_GET['category'] : "";
-        $active = isset($_GET['active']) ? $_GET['active'] : '1';
+        $active = isset($_GET['active']) ? $_GET['active'] : 'all';
 
         $stm = $this->service->getAll($adminUserId, $active, $category, $order);
         $response->getBody()->write(json_encode($stm->fetchAll(\PDO::FETCH_ASSOC)));
@@ -100,7 +100,7 @@ class ProductController
 
             $response->getBody()->write(json_encode([
                 'res' => 'sucess',
-                'userMessage' => 'Category delete successfully'
+                'userMessage' => 'Product remove successfully'
             ]));
             return $response->withStatus(200);
 
@@ -108,7 +108,29 @@ class ProductController
 
             $response->getBody()->write(json_encode([
                 'res' => 'sucess',
-                'userMessage' => 'the category could not be delete successfully'
+                'userMessage' => 'the Product could not be remove successfully'
+            ]));
+            return $response->withStatus(404);
+
+        }
+    }
+    public function delete(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $adminUserId = $request->getHeader('admin_user_id')[0];
+
+        if ($this->service->delete($args['id'], $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Product delete successfully'
+            ]));
+            return $response->withStatus(200);
+
+        } else {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'the Product could not be delete successfully'
             ]));
             return $response->withStatus(404);
 

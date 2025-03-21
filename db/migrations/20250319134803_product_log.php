@@ -12,7 +12,6 @@ class ProductLog extends AbstractMigration
       ->addColumn('action', 'string', ['limit' => 255])
       ->addColumn('timestamp', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
       ->addForeignKey('admin_user_id', 'admin_user', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
-      ->addForeignKey('product_id', 'product', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
       ->create();
 
     $this->execute("INSERT INTO product_log (id, product_id, admin_user_id, action, timestamp) VALUES

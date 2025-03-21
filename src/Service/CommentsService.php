@@ -81,11 +81,11 @@ class CommentsService
             echo "Erro na consulta SQL: " . $pDOException->getMessage();
         }
     }
-    public function getAllLike()
+    public function getLike($id)
     {
         $query = "
             select cl.*, c.comment_text as comment_text_liked, au.name as admin_user_liked from comment_likes cl inner join admin_user au on au.id = cl.admin_user_id 
-            inner join comments c on c.id = cl.comment_id;
+            inner join comments c on c.id = cl.comment_id where cl.comment_id = {$id};
            ";
 
         $stm = $this->pdo->prepare($query);
