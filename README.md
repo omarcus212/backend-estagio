@@ -182,7 +182,7 @@ Sinta-se a vontade para refatorar o que achar pertinente, considerando questões
 ### Desafios
 
 - [x] Substituir o banco serverless **SQLite** por um banco como **MySQL**/**PostgreSQL**/outro e servir por container;
-- [ ] Escrever **novos testes unitários** para funcionalidades faltantes;
+- [x] Escrever **novos testes unitários** para funcionalidades faltantes;
 - [ ] Implementar um **Linter** e disponibilizar por docker (especificar comando);
 - [ ] Implementar **análise estática** e disponibilizar por docker (especificar comando);
 - [ ] Escrever um script "_`check_deploy.sh`_" que faz todas as validações implementadas como uma pipeline e determina se o código está pronto para produção.
