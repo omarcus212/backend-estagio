@@ -102,4 +102,26 @@ class CommentsController
         }
         return $response->withStatus(200);
     }
+
+    public function deleteOne(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $adminUserId = $request->getHeader('admin_user_id')[0];
+
+        if ($this->service->deleteOne($args['commentId'], $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Category delete successfully'
+            ]));
+            return $response->withStatus(200);
+
+        } else {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'the category could not be delete successfully'
+            ]));
+            return $response->withStatus(404);
+        }
+    }
 }

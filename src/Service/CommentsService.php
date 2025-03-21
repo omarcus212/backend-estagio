@@ -115,4 +115,24 @@ class CommentsService
             echo "Erro na consulta SQL: " . $pDOException->getMessage();
         }
     }
+
+    public function deleteOne($comment_id, $admin_user_id)
+    {
+        try {
+            $stm = $this->pdo->prepare("
+            DELETE from comments where  product_id= {$comment_id} and admin_user_id = {$admin_user_id} ;;
+        ");
+            if (!$stm->execute())
+                return false;
+
+            $stm = $this->pdo->prepare("DELETE from comment_likes where comment_id = {$comment_id};");
+            if (!$stm->execute())
+                return false;
+
+            return $stm;
+
+        } catch (\PDOException $pDOException) {
+            echo "Erro na consulta SQL: " . $pDOException->getMessage();
+        }
+    }
 }
