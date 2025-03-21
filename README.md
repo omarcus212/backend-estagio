@@ -234,7 +234,7 @@ cd teste-backend-estagio
 
 - É importante que se adicione o header admin_user_id com o id do usuário desejado ao acessar as rotas para simular o uso de um usuário no sistema.
 
-* Alterações
+### Alterações
 
 Foi adicionada uma nova rota de **delete** na API de Produtos, responsável por **deletar permanentemente** o produto. Ao utilizar essa rota, o produto será removido de forma definitiva, inclusive das outras rotas relacionadas.
 
@@ -261,5 +261,5 @@ Essas mudanças permitem maior controle sobre a exclusão dos produtos, oferecen
 * **GET `/comments/likes/id`** → busca pelos likes feitos no comentarios, id = id do comentario que deseja buscar
 * **INSERT `/comments/like/id`** → deixa o like no comentario desejado, id = id do comentario.
 
-✅ Pronto!
+##✅ Pronto!
 Após finalizar as migrations, a API estará pronta para uso!
