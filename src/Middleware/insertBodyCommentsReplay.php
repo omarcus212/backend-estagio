@@ -15,11 +15,10 @@ class InsertBodyCommentsReplay
 
         $body = $request->getParsedBody();
         $response = new Response();
-        var_dump(is_numeric('product'));
 
         if (
-            empty($body['product']) || !is_numeric('product') ||
-            !isset($body['active']) || !is_bool($body['active'])
+            empty($body['product']) ||
+            !isset($body['comment']) || empty($body['comment'])
         ) {
 
             $response->getBody()->write(json_encode(['msg' => 'Empty or non-existent fields']));

@@ -8,9 +8,10 @@ use Contatoseguro\TesteBackend\Controller\ReportController;
 use Contatoseguro\TesteBackend\Controller\CommentsController;
 
 use Contatoseguro\TesteBackend\Middleware\InsertBodyCategoryMiddleware;
-
-
+use Contatoseguro\TesteBackend\Middleware\InsertBodyComments;
+use Contatoseguro\TesteBackend\Middleware\InsertBodyCommentsReplay;
 use Contatoseguro\TesteBackend\Middleware\InsertBodyProductMiddleware;
+
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Dotenv\Dotenv;
@@ -49,8 +50,10 @@ $app->group('/categories', function (RouteCollectorProxy $group) {
 $app->group('/comments', function (RouteCollectorProxy $group) {
     $group->get('/product/{id}', [CommentsController::class, 'getOne']);
     $group->get('/likes', [CommentsController::class, 'getAllLike']);
-    $group->post('/product/{id}', [CommentsController::class, 'insertOne']);
-    $group->post('/replay/{commentId}', [CommentsController::class, 'insertReplay']);
+    $group->post('/product/{id}', [CommentsController::class, 'insertOne'])
+        ->add(new InsertBodyComments());
+    $group->post('/replay/{commentId}', [CommentsController::class, 'insertReplay'])
+        ->add(new InsertBodyCommentsReplay());
     $group->post('/like/{commentId}', [CommentsController::class, 'insertLike']);
     $group->delete('/{commentId}', [CommentsController::class, 'deleteOne']);
 });
