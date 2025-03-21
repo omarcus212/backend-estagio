@@ -261,5 +261,5 @@ Essas mudanças permitem maior controle sobre a exclusão dos produtos, oferecen
 * **GET `/comments/likes/id`** → busca pelos likes feitos no comentarios, id = id do comentario que deseja buscar
 * **INSERT `/comments/like/id`** → deixa o like no comentario desejado, id = id do comentario.
 
-##✅ Pronto!
+### ✅ Pronto!
 Após finalizar as migrations, a API estará pronta para uso!
