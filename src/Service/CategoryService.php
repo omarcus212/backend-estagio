@@ -20,6 +20,7 @@ class CategoryService
             SELECT *
             FROM category c
             WHERE c.company_id = {$this->getCompanyFromAdminUser($adminUserId)} and c.company_id != 'null'
+            ORDER BY c.id desc
         ";
 
         $stm = $this->pdo->prepare($query);
@@ -65,7 +66,10 @@ class CategoryService
 
     public function insertOne($body, $adminUserId)
     {
-        $stm = $this->pdo->prepare("
+
+        try {
+
+            $stm = $this->pdo->prepare("
             INSERT INTO category (
                 company_id,
                 title,
@@ -77,14 +81,22 @@ class CategoryService
             )
         ");
 
-        return $stm->execute();
+            return $stm->execute();
+
+        } catch (\PDOException $pDOException) {
+            echo "Erro na consulta SQL: " . $pDOException->getMessage();
+        }
     }
 
     public function updateOne($id, $body, $adminUserId)
     {
-        $active = (int) $body['active'];
 
-        $stm = $this->pdo->prepare("
+        try {
+
+
+            $active = (int) $body['active'];
+
+            $stm = $this->pdo->prepare("
             UPDATE category
             SET title = '{$body['title']}',
                 active = {$active}
@@ -92,19 +104,30 @@ class CategoryService
             AND company_id = {$this->getCompanyFromAdminUser($adminUserId)}
         ");
 
-        return $stm->execute();
+            return $stm->execute();
+
+        } catch (\PDOException $pDOException) {
+
+            echo "Erro na consulta SQL: " . $pDOException->getMessage();
+        }
     }
 
     public function deleteOne($id, $adminUserId)
     {
-        $stm = $this->pdo->prepare("
+        try {
+            $stm = $this->pdo->prepare("
             DELETE
             FROM category
             WHERE id = {$id}
             AND company_id = {$this->getCompanyFromAdminUser($adminUserId)}
         ");
 
-        return $stm->execute();
+            return $stm->execute();
+
+        } catch (\PDOException $pDOException) {
+
+            echo "Erro na consulta SQL: " . $pDOException->getMessage();
+        }
     }
 
     private function getCompanyFromAdminUser($adminUserId)

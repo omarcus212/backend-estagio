@@ -8,7 +8,7 @@ class Category extends AbstractMigration
   {
     $table = $this->table('category');
     $table->addColumn('company_id', 'integer', ['signed' => false])
-      ->addColumn('title', 'string', ['limit' => 255])
+      ->addColumn('title', 'string', ['limit' => 255, 'null' => false])
       ->addColumn('active', 'boolean')
       ->addForeignKey('company_id', 'company', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
       ->create();

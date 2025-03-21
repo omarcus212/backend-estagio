@@ -3,7 +3,6 @@
 namespace Contatoseguro\TesteBackend\Service;
 
 use Contatoseguro\TesteBackend\Config\DB;
-use PDOException;
 
 class CommentsService
 {
@@ -44,7 +43,7 @@ class CommentsService
 
             $stm->fetchAll(\PDO::FETCH_ASSOC);
             return true;
-        } catch (PDOException $pDOException) {
+        } catch (\PDOException $pDOException) {
             echo "Erro na consulta SQL: " . $pDOException->getMessage();
         }
     }
@@ -78,7 +77,7 @@ class CommentsService
             $stm->fetchAll(\PDO::FETCH_ASSOC);
             return true;
 
-        } catch (PDOException $pDOException) {
+        } catch (\PDOException $pDOException) {
             echo "Erro na consulta SQL: " . $pDOException->getMessage();
         }
     }
@@ -112,7 +111,7 @@ class CommentsService
             return $stm->rowCount();
 
 
-        } catch (PDOException $pDOException) {
+        } catch (\PDOException $pDOException) {
             echo "Erro na consulta SQL: " . $pDOException->getMessage();
         }
     }

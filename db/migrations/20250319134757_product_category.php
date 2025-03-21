@@ -7,8 +7,8 @@ class ProductCategory extends AbstractMigration
   public function up()
   {
     $table = $this->table('product_category');
-    $table->addColumn('cat_id', 'integer', ['signed' => false])
-      ->addColumn('product_id', 'integer', ['signed' => false])
+    $table->addColumn('cat_id', 'integer', ['signed' => false, 'null' => false])
+      ->addColumn('product_id', 'integer', ['signed' => false, 'null' => false])
       ->addForeignKey('cat_id', 'category', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
       ->addForeignKey('product_id', 'product', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
       ->create();

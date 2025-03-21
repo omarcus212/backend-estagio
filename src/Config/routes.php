@@ -6,6 +6,10 @@ use Contatoseguro\TesteBackend\Controller\HomeController;
 use Contatoseguro\TesteBackend\Controller\ProductController;
 use Contatoseguro\TesteBackend\Controller\ReportController;
 use Contatoseguro\TesteBackend\Controller\CommentsController;
+
+use Contatoseguro\TesteBackend\Middleware\InsertBodyCategoryMiddleware;
+
+
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Dotenv\Dotenv;
@@ -32,8 +36,10 @@ $app->group('/products', function (RouteCollectorProxy $group) {
 $app->group('/categories', function (RouteCollectorProxy $group) {
     $group->get('', [CategoryController::class, 'getAll']);
     $group->get('/{id}', [CategoryController::class, 'getOne']);
-    $group->post('', [CategoryController::class, 'insertOne']);
-    $group->put('/{id}', [CategoryController::class, 'updateOne']);
+    $group->post('', [CategoryController::class, 'insertOne'])
+        ->add(new InsertBodyCategoryMiddleware());
+    $group->put('/{id}', [CategoryController::class, 'updateOne'])
+        ->add(new InsertBodyCategoryMiddleware());
     $group->delete('/{id}', [CategoryController::class, 'deleteOne']);
 });
 

@@ -8,7 +8,7 @@ class Product extends AbstractMigration
   {
     $table = $this->table('product');
     $table->addColumn('company_id', 'integer', ['signed' => false])
-      ->addColumn('title', 'string', ['limit' => 255])
+      ->addColumn('title', 'string', ['limit' => 255, 'null' => false])
       ->addColumn('price', 'float')
       ->addColumn('active', 'boolean')
       ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])

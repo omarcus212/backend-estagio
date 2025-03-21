@@ -39,10 +39,23 @@ class CategoryController
         $adminUserId = $request->getHeader('admin_user_id')[0];
 
         if ($this->service->insertOne($body, $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Category created successfully'
+            ]));
             return $response->withStatus(200);
+
         } else {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'fail',
+                'userMessage' => 'the category could not be created successfully'
+            ]));
+
             return $response->withStatus(404);
         }
+
     }
 
     public function updateOne(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -51,8 +64,19 @@ class CategoryController
         $adminUserId = $request->getHeader('admin_user_id')[0];
 
         if ($this->service->updateOne($args['id'], $body, $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Category updated successfully'
+            ]));
             return $response->withStatus(200);
+
         } else {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'fail',
+                'userMessage' => 'the category could not be updated successfully'
+            ]));
             return $response->withStatus(404);
         }
     }
@@ -62,8 +86,19 @@ class CategoryController
         $adminUserId = $request->getHeader('admin_user_id')[0];
 
         if ($this->service->deleteOne($args['id'], $adminUserId)) {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'Category delete successfully'
+            ]));
             return $response->withStatus(200);
+
         } else {
+
+            $response->getBody()->write(json_encode([
+                'res' => 'sucess',
+                'userMessage' => 'the category could not be delete successfully'
+            ]));
             return $response->withStatus(404);
         }
     }
