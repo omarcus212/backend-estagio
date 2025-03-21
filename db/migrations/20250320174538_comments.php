@@ -28,9 +28,9 @@ class Comments extends AbstractMigration
             SELECT 
             c.id,
             c.product_id,
+            c.comment_text,
             c.admin_user_id,
             au.name AS admin_name,
-            c.comment_text,
             p.title AS product_title,
             c.created_at,
             c.updated_at,

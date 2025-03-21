@@ -14,7 +14,7 @@ class CommentsService
     public function getOne($id)
     {
         $query = "
-       SELECT * FROM view_product_comments WHERE product_id = :product_id;
+       SELECT * FROM view_product_comments WHERE product_id = :product_id order by id desc;
     ";
 
         $stm = $this->pdo->prepare($query);
@@ -120,7 +120,7 @@ class CommentsService
     {
         try {
             $stm = $this->pdo->prepare("
-            DELETE from comments where  product_id= {$comment_id} and admin_user_id = {$admin_user_id} ;;
+            DELETE from comments where  id = {$comment_id} and admin_user_id = {$admin_user_id} ;;
         ");
             if (!$stm->execute())
                 return false;

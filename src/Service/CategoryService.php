@@ -17,7 +17,7 @@ class CategoryService
     {
 
         $query = "
-            SELECT *
+            SELECT c.id, c.company_id, c.title
             FROM category c
             WHERE c.company_id = {$this->getCompanyFromAdminUser($adminUserId)} and c.company_id != 'null'
             ORDER BY c.id desc

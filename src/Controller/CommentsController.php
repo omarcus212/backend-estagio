@@ -85,19 +85,20 @@ class CommentsController
     {
         $adminUserId = $request->getHeader('admin_user_id')[0];
         $stm = $this->service->insertLike($args["commentId"], $adminUserId);
-        if ($stm == 1) {
+
+        if ($stm) {
             $response
                 ->getBody()
                 ->write(json_encode([
                     'res' => 'sucess',
                     'userMessage' => 'Liked'
                 ]));
-        } else {
+        } else if (!$stm) {
             $response
                 ->getBody()
                 ->write(json_encode([
                     'res' => 'fail',
-                    'userMessage' => 'You already liked this comment'
+                    'userMessage' => 'it was not possible to perform this action / You already liked this comment'
                 ]));
         }
         return $response->withStatus(200);
@@ -111,7 +112,7 @@ class CommentsController
 
             $response->getBody()->write(json_encode([
                 'res' => 'sucess',
-                'userMessage' => 'Category delete successfully'
+                'userMessage' => 'Comment delete successfully'
             ]));
             return $response->withStatus(200);
 
@@ -119,7 +120,7 @@ class CommentsController
 
             $response->getBody()->write(json_encode([
                 'res' => 'sucess',
-                'userMessage' => 'the category could not be delete successfully'
+                'userMessage' => 'the Comment could not be delete successfully'
             ]));
             return $response->withStatus(404);
         }
