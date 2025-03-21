@@ -53,7 +53,7 @@ $app->group('/comments', function (RouteCollectorProxy $group) {
     $group->get('/likes/{id}', [CommentsController::class, 'getAllLike']);
     $group->post('/product/{id}', [CommentsController::class, 'insertOne'])
         ->add(new InsertBodyComments());
-    $group->post('/replay/{commentId}', [CommentsController::class, 'insertReplay'])
+    $group->post('/reply/{commentId}', [CommentsController::class, 'insertReply'])
         ->add(new InsertBodyCommentsReplay());
     $group->post('/like/{commentId}', [CommentsController::class, 'insertLike']);
     $group->delete('/{commentId}', [CommentsController::class, 'deleteOne']);

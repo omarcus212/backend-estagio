@@ -48,7 +48,7 @@ class CommentsService
         }
     }
 
-    public function insertReplay($parent_id, $adminUserId, $body)
+    public function insertReply($parent_id, $adminUserId, $body)
     {
 
         try {

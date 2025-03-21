@@ -49,11 +49,11 @@ class CommentsController
         return $response->withStatus(200);
     }
 
-    public function insertReplay(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function insertReply(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $adminUserId = $request->getHeader('admin_user_id')[0];
         $body = $request->getParsedBody();
-        $stm = $this->service->insertReplay($args["commentId"], $adminUserId, $body);
+        $stm = $this->service->insertReply($args["commentId"], $adminUserId, $body);
 
         if ($stm) {
             $response

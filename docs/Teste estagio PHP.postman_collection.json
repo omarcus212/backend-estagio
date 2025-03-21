@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "917020fd-15f1-4f4a-b960-741adc42c050",
+		"name": "Teste estagio PHP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21065723",
+		"_collection_link": "https://lunar-trinity-832575.postman.co/workspace/My-Workspace~a30ba3a8-325d-43b1-886e-7e889fae3272/collection/21065723-917020fd-15f1-4f4a-b960-741adc42c050?action=share&source=collection_link&creator=21065723"
+	},
+	"item": [
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "categories get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/categories",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/categories/16",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"categories",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"novo\",\r\n  \"active\": true\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/categories",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"tste\",\r\n  \"active\": true\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/categories/17",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"categories",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/categories/8",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"categories",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "products get id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/products/44",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"products",
+								"44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/products",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "house",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"company_id\": 1,\r\n  \"title\": \"barco\",\r\n  \"price\": 12000.4,\r\n  \"active\": true,\r\n  \"category_id\": 7\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/products",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"company_id\": 1,\r\n  \"title\": \"fdgsdfg 62\",\r\n  \"price\": 12000.4,\r\n  \"active\": true,\r\n  \"category_id\": 7\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/products/21",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"products",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products remove id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/products/remove/7",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"products",
+								"remove",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/products/delete/21",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"products",
+								"delete",
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "log",
+			"item": [
+				{
+					"name": "get log",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/report",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "commets",
+			"item": [
+				{
+					"name": "insert commits",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\":\"commit de teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/comments/product/1",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"comments",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert commits replay",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"product\": 1,\r\n    \"comment\":\"o comentario debaixo é comment teste e eu estou comentando encima dele\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/comments/replay/3",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"comments",
+								"replay",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get commits  product id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIPHP}}/comments/product/1",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"comments",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete commit",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/comments/3",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"comments",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "likes",
+			"item": [
+				{
+					"name": "get likes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APIPHP}}/comments/likes/5",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"comments",
+								"likes",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert likes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "admin_user_id",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIPHP}}/comments/like/5",
+							"host": [
+								"{{APIPHP}}"
+							],
+							"path": [
+								"comments",
+								"like",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APIPHP",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
