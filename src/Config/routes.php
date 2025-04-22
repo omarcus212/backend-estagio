@@ -35,7 +35,7 @@ $app->group('/products', function (RouteCollectorProxy $group) {
     $group->put('/{id}', [ProductController::class, 'updateOne'])
         ->add(new InsertBodyProductMiddleware());
     $group->delete('/remove/{id}', [ProductController::class, 'deleteOne']);
-    $group->delete('/delete/{id}', [ProductController::class, 'delete']);
+    // $group->delete('/delete/{id}', [ProductController::class, 'delete']);
 });
 
 $app->group('/categories', function (RouteCollectorProxy $group) {
